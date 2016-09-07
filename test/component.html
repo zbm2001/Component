@@ -42,7 +42,7 @@ textarea {
   </div>
 </div>
 </textarea>
-<h3>单选项-打开选并中状态</h3>
+<h3>单选项-打开并选中状态</h3>
 <textarea><div class="dropdown open">
   <!-- 若下拉菜单不在dropdown容器内、并且位于form元素内，就创建
   <input type="hidden" name="value" value="opt1"> -->
@@ -93,14 +93,15 @@ textarea {
   </div>
 </div>
 </textarea>
-<h3>多选项-打开选并中状态</h3>
+<h3>多选项-打开并选中状态</h3>
 <textarea><div class="dropdown open">
   <!-- 若下拉菜单不在dropdown容器内、并且位于form元素内，就创建
   <input type="hidden" name="value" value="opt1">
   <input type="hidden" name="value" value="opt2"> -->
-  <button type="button" class="dropdown-trigger" name="value" data-selected-options="[{&quot;text&quot;:&quot;&quot;选项1&quot;,&quot;value&quot;:&quot;&quot;opt1&quot;},{&quot;text&quot;:&quot;&quot;选项2&quot;,&quot;value&quot;:&quot;&quot;opt2&quot;}]" value="opt1,opt2" data-type="select-multiple" placeholder="请选择"><span class="text">选项1,...</span><i class="arrow"></i></button>
-  <!-- 超过一个选中项显示计数，通常位于右上角的数标 --> 
-  <i class="count">2</i> 
+  <!-- placeholder属性用来空选项时的占位文字，value=""
+  文字超出显示省略号，超过一个选中项时，用小角标将计数显示在右上角 --> 
+  <button type="button" class="dropdown-trigger" name="value" data-selected-options="[{&quot;text&quot;:&quot;&quot;选项1&quot;,&quot;value&quot;:&quot;&quot;opt1&quot;},{&quot;text&quot;:&quot;&quot;选项2&quot;,&quot;value&quot;:&quot;&quot;opt2&quot;}]" value="opt1,opt2" data-type="select-multiple" placeholder="请选择"><span class="text">选项1, 选项2</span><i class="arrow"></i><i class="tag-count">2</i></button> 
+  <i class="tag-count">2</i> 
   <!-- 下拉菜单面板 -->
   <div class="dropdown-panel"> 
     <!-- 下拉选项组，可多个并存 -->
@@ -141,7 +142,7 @@ textarea {
   </div>
 </div>
 </textarea>
-<h3>可输入单选项-打开选并中状态</h3>
+<h3>可输入单选项-打开并选中状态</h3>
 <textarea><div class="dropdown">
   <!-- 若下拉菜单不在dropdown容器内、并且位于form元素内，就创建
   <input type="hidden" name="value" value="opt1"> -->
@@ -185,20 +186,19 @@ textarea {
   </div>
 </div>
 </textarea>
-<h3>可输入多选项-打开选并中状态</h3>
+<h3>可输入多选项-打开并选中状态</h3>
 <textarea><div class="dropdown">
   <!-- 
   若下拉菜单不在dropdown容器内、并且位于form元素内，就连带创建 input[type="hidden"]
   <span class="selected-option"><input type="hidden" name="value" value="opt1">选项1<i class="remove" title="取消选项"></i></span>
   <span class="selected-option"><input type="hidden" name="value" value="opt1">选项2<i class="remove" title="取消选项"></i></span> -->
   
-  <!-- 
+  <!-- 优先方案
   若下拉菜单不在dropdown容器内、并且位于form元素内，就连带创建 input[type="hidden"]
-  <span class="selected-options"><input type="hidden" name="value" value="opt1"><input type="hidden" name="value" value="opt2">选项1,...<i class="count">2</i></span> -->
+  文字超出显示省略号，超过一个选中项时，用小角标将计数显示在右上角
+  <div class="selected-options"><input type="hidden" name="value" value="opt1"><input type="hidden" name="value" value="opt2"><span>选项1, 选项2</span><i class="tag-count">2</i></div> -->
   
-  <input class="dropdown-trigger" name="value" data-type="input-select-multiple" value="" data-selected-options="[{&quot;text&quot;:&quot;&quot;选项1&quot;,&quot;value&quot;:&quot;&quot;opt1&quot;},{&quot;text&quot;:&quot;&quot;选项2&quot;,&quot;value&quot;:&quot;&quot;opt2&quot;}]">
-  <!-- 超过一个选中项显示计数，通常位于右上角的数标 --> 
-  <i class="count">2</i> 
+  <input class="dropdown-trigger" name="value" data-type="input-select-multiple" ellipsis value="" data-selected-options="[{&quot;text&quot;:&quot;&quot;选项1&quot;,&quot;value&quot;:&quot;&quot;opt1&quot;},{&quot;text&quot;:&quot;&quot;选项2&quot;,&quot;value&quot;:&quot;&quot;opt2&quot;}]">
   <!-- 下拉菜单面板 -->
   <div class="dropdown-panel"> 
     <!-- 下拉选项组，可多个并存 -->
