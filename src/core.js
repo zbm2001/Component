@@ -1,13 +1,14 @@
 import './util/assign';
 import typeOf from './util/typeOf';
 import create from './util/create';
-import '../lib/Component';
-import $ from '../lib/jquery-plugins/utils';
+import '../lib/EventEmitter';
+import '../lib/jquery-plugins/utils';
 
-function DropDown(){  
+function Component(){ 
+
 }
 
-Component.inherito(DropDown, {
+EventEmitter.inherito(Component, {
 
   // 根元素
   root: null,
@@ -44,27 +45,109 @@ Component.inherito(DropDown, {
 
   // 初始化各部件
   initParts(){
-    var elements = this.root.getElementsByTagName('*');
-    forEach.call(elements, element => {
-      let part = element.getAttribute(this.partAttributeName);
-      if(part){
-        this.part = 
-      }
-    });
+    var elements = this.root.getElementsByTagName('*'),
+      element, i = 0;
+
+    while(element = elements[i++]){
+      let partName = element.getAttribute(this.partAttributeName);
+      if(partName){
+        this[partName] = element;
+      } 
+    }
   },
   
   // 事件处理函数
-  handleEvent(){},
+  handleEvent(event, ...args){
 
-  // 渲染
-  render(){},
+  },
+
+  // 构建组件
+  render(){
+
+  },
 
   // 销毁
-  destroy(){}
+  destroy(){
+    this.parent
+  },
 
-}, {
+  /**
+   * 追加子实例
+   * @param  {object} instance 必须是 EventEmitter 的实例
+   * @return {object} instance 参数
+   * @api public
+   */
+  appendChild(instance, ) {
+    if(!(instance instanceof Component){
+      throw new TypeError(instance + 'is not instanceof Component.');
+    }
+    if(Component.contains(instance, this, true)){
+      throw new Error('The new child instance contains this instance.');
+    }
+    this.children || (this.children = []);
+    if (this.children.indexOf(instance) < 0) {
+      if(instance.parent){
+        instance.parent.removeChild(instance);
+      }
+      this.children.push(instance);
+      instance.parent = this;
+    }
+    return instance;
+  },
 
-})
+  /**
+   * 删除子实例
+   * @param  {object} instance 必须是 EventEmitter 的实例
+   * @return {object} instance 参数
+   * @api public
+   */
+  removeChild(instance) {
+    if(!(instance instanceof EventEmitter){
+      throw new TypeError(instance + 'is not instanceof EventEmitter.');
+    }
+    var index;
+    if (this.children && (index = this.children.indexOf(instance)) > -1) {
+      this.children.splice(index, 1);
+      delete instance.parent;
+    }
+    else{
+      throw new Error('The instance to be removed is not a child of this instance.');
+    }
+    return instance;
+  },
+
+  /**
+   * 判断是否为祖先实例
+   * @param  {object} instance 必须是 EventEmitter 的实例
+   * @param  {boolean} includeSelf 指定是否包含自身
+   * @return {boolean}
+   * @api public
+   */
+  isAncestor(instance, includeSelf){
+    var parent = includeSelf ? this : this.parent;
+    do{
+      if(instance === parent){
+        return true;
+      }
+    }while(parent = parent.parent);
+    return false;
+  }
+
+}, 
+
+{
+
+  contaions(parentInstance, childInstance, includeSelf){
+    var parent = includeSelf ? childInstance : childInstance.parent;
+    do{
+      if(parentInstance === parent){
+        return true;
+      }
+    }while(parent = parent.parent);
+    return false;
+  }
+
+});
 
 
 
