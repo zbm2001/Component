@@ -38,13 +38,13 @@ rollup.rollup({
   var result = bundle.generate({
     // output format - 'amd', 'cjs', 'es', 'iife', 'umd'
     format: 'iife',
-    moduleName: 'Validator', // umd 或 iife 模式下，若入口文件含 export，必须加上该属性
+    moduleName: 'Component', // umd 或 iife 模式下，若入口文件含 export，必须加上该属性
     sourceMap: false
   });
 
   // dest 生成的目标文件
-  fs.writeFileSync( 'validator.js', banner + '\n' + result.code );
-  fs.writeFileSync( 'validator.min.js', banner + '\n' + minify(result.code) );
+  fs.writeFileSync( 'Component.js', banner + '\n' + result.code );
+  fs.writeFileSync( 'Component.min.js', banner + '\n' + minify(result.code) );
   
   
   // // bundle写入方式
