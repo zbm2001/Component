@@ -10,13 +10,13 @@ function Component(){
 
 EventEmitter.inherito(Component, {
 
-  // 根元素
+  // 组件根元素
   root: null,
 
-  // 文档对象
+  // 文档对象（相对于组件根元素）
   doc: null,
 
-  // 文档根元素式
+  // 文档根元素
   docRoot: null,
 
   // 初始化
@@ -58,17 +58,17 @@ EventEmitter.inherito(Component, {
   
   // 事件处理函数
   handleEvent(event, ...args){
-
+    event
   },
 
   // 构建组件
   render(){
-
+    '<div he="click;">'
   },
 
-  // 销毁
+  // 销毁组件
   destroy(){
-    this.parent
+    //this.parent
   },
 
   /**
@@ -78,7 +78,7 @@ EventEmitter.inherito(Component, {
    * @api public
    */
   appendChild(instance, ) {
-    if(!(instance instanceof Component){
+    if(!(instance instanceof Component)){
       throw new TypeError(instance + 'is not instanceof Component.');
     }
     if(Component.contains(instance, this, true)){
@@ -102,7 +102,7 @@ EventEmitter.inherito(Component, {
    * @api public
    */
   removeChild(instance) {
-    if(!(instance instanceof EventEmitter){
+    if(!(instance instanceof EventEmitter)){
       throw new TypeError(instance + 'is not instanceof EventEmitter.');
     }
     var index;
@@ -137,7 +137,7 @@ EventEmitter.inherito(Component, {
 
 {
 
-  contaions(parentInstance, childInstance, includeSelf){
+  contains(parentInstance, childInstance, includeSelf){
     var parent = includeSelf ? childInstance : childInstance.parent;
     do{
       if(parentInstance === parent){
