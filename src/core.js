@@ -58,11 +58,29 @@ EventEmitter.inherito(Component, {
   
   // 事件处理函数
   handleEvent(event, ...args){
-    event
+    switch(event.type){
+      case 'click':
+        break;
+      default:
+    }
+  },
+
+  click(event){
+    var delegateNode = $.iiancestorAll(event.target, '[]', event.currentTarget)
+    switch(event.type){
+      case 'click':
+        break;
+      default:
+    }
+  },
+
+  mouse(event){
+
   },
 
   // 构建组件
-  render(){
+  render(model){
+    var data = vm(mode);
     '<div he="click;">'
   },
 
@@ -73,7 +91,7 @@ EventEmitter.inherito(Component, {
 
   /**
    * 追加子实例
-   * @param  {object} instance 必须是 EventEmitter 的实例
+   * @param  {object} instance 必须是 Component 的实例
    * @return {object} instance 参数
    * @api public
    */
@@ -102,8 +120,8 @@ EventEmitter.inherito(Component, {
    * @api public
    */
   removeChild(instance) {
-    if(!(instance instanceof EventEmitter)){
-      throw new TypeError(instance + 'is not instanceof EventEmitter.');
+    if(!(instance instanceof Component)){
+      throw new TypeError(instance + 'is not instanceof Component.');
     }
     var index;
     if (this.children && (index = this.children.indexOf(instance)) > -1) {
@@ -123,8 +141,8 @@ EventEmitter.inherito(Component, {
    * @return {boolean}
    * @api public
    */
-  isAncestor(instance, includeSelf){
-    var parent = includeSelf ? this : this.parent;
+  isAncestor(instance, includeItSelf){
+    var parent = includeItSelf ? this : this.parent;
     do{
       if(instance === parent){
         return true;
@@ -137,8 +155,8 @@ EventEmitter.inherito(Component, {
 
 {
 
-  contains(parentInstance, childInstance, includeSelf){
-    var parent = includeSelf ? childInstance : childInstance.parent;
+  contains(parentInstance, childInstance, includeItSelf){
+    var parent = includeItSelf ? childInstance : childInstance.parent;
     do{
       if(parentInstance === parent){
         return true;
